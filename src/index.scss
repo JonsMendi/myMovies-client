@@ -3,3 +3,26 @@ $color: steelblue;
 .my-movies {
   color: $color;
 }
+
+.movie-poster {
+  display: flex;
+  justify-content: center;
+  height: 500px;
+}
+
+.movie-title {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.movie-description {
+  display: flex;
+  justify-content: center;
+}
+
+.movie-button {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
