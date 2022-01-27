@@ -4,25 +4,42 @@ $color: steelblue;
   color: $color;
 }
 
+.main-view {
+  background-color: #b85042;
+  padding: 20px;
+}
+
+.movie-card {
+  background-color: #e7e8d1;
+}
+
+.movie-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e7e8d1;
+}
+
 .movie-poster {
   display: flex;
   justify-content: center;
   height: 500px;
 }
 
-.movie-title {
-  display: flex;
-  justify-content: center;
+.movie-title,
+.movie-description,
+.movie-releaseYear,
+.movie-genre,
+.movie-director,
+.movie-actor,
+.movie-rating,
+.movie-featured {
   margin: 10px;
-}
-
-.movie-description {
-  display: flex;
-  justify-content: center;
 }
 
 .movie-button {
   display: flex;
   justify-content: center;
+  padding: 20px;
   margin: 10px;
 }
