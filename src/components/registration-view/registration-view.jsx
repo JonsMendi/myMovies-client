@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import './registration-views.scss';
+import './registration-view.scss';
 
 export function RegistrationView(props) {
     const [ username, setUsername ] = useState('');
@@ -27,12 +27,12 @@ export function RegistrationView(props) {
             </div>
             <div>
                 <label>
-                    <h3>Username:</h3> <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <h3>Email:</h3> <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
                 </label>
             </div>
             <div>
                 <label>
-                    <h3>Username:</h3> <input type="text" value={birth} onChange={e => setBirth(e.target.value)} />
+                    <h3>Birth:</h3> <input type="text" value={birth} onChange={e => setBirth(e.target.value)} />
                 </label>
             </div>
             <div>
