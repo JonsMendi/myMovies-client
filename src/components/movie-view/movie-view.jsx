@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class MovieView extends React.Component {
 
@@ -49,3 +50,27 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+// propTypes - Give warnings in browser/console if data does not match with the required.
+MovieView.propTypes = {
+  movieData: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImageUrl: PropTypes.string.isRequired,
+    ReleaseYear: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired,
+      Death: PropTypes.string.isRequired
+    }),
+    Actors: PropTypes.array.isRequired,
+    Rating: PropTypes.string.isRequired,
+    Featured: PropTypes.bool.isRequired
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired
+};
