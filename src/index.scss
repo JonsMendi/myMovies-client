@@ -5,7 +5,7 @@ $color: steelblue;
 }
 
 .main-view {
-  background-color: #b85042;
+  background-color: black;
   padding: 20px;
 }
 
@@ -17,13 +17,12 @@ $color: steelblue;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e7e8d1;
+  background-color: whitesmoke;
 }
 
 .movie-poster {
   display: flex;
   justify-content: center;
-  height: 500px;
 }
 
 .movie-title,
