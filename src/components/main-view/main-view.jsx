@@ -1,11 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import PropTypes from 'prop-types';
 import { ButtonLogout } from '../button/button-logout';
+import './main-view.scss';
 
 export class MainView extends React.Component {
     // constructor() starts before then render.
@@ -52,20 +55,21 @@ export class MainView extends React.Component {
       if (movies.length === 0) return <div className="main-view" />;
 
       return (
-        <div className = 'main-view'>
+        <Row className="justify-content-md-center main-view">
           {/*If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
           {selectedMovie
         ? 
-        (<div>  
-        <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-        </div>)
+          <Col md={8}>
+            <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+          </Col>
         : 
-        (<div> 
-          {movies.map(movie => (<MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>))}
-          <ButtonLogout label={'Logout'}/>
-        </div>)
+          movies.map(movie => (
+          <Col md={3}>
+            <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
+          </Col>
+          ))
         }
-        </div>
+        </Row>
       );
     }
 
