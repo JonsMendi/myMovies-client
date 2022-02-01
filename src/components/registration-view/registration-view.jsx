@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import './registration-view.scss';
+import { Container, Row, Col, Card,Form, Button } from 'react-bootstrap';
 
 export function RegistrationView(props) {
     const [ username, setUsername ] = useState('');
@@ -14,31 +15,36 @@ export function RegistrationView(props) {
     };
 
     return (
-        <div className='registration-view'>
-            <div>
-                <label>
-                    <h3>Username:</h3> <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-                </label>
-            </div>
-            <div>
-                <label>
-                    <h3>Password:</h3> <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                </label>
-            </div>
-            <div>
-                <label>
-                    <h3>Email:</h3> <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-                </label>
-            </div>
-            <div>
-                <label>
-                    <h3>Birth:</h3> <input type="text" value={birth} onChange={e => setBirth(e.target.value)} />
-                </label>
-            </div>
-            <div>
-                <button type="submit" onClick={handleSubmit}>Register</button>
-            </div>
-        </div>
+        <Container>
+            <Row className='justify-content-md-center text-center'>
+                <Col md={5}>
+                    <Card border="danger" className="mt-5">
+                        <Card.Body>
+                        <Card.Title className="mb-4"><h3>Register here brother!</h3></Card.Title>
+                            <Form>
+                                <Form.Group className="mb-4" controlId="formUsername">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="text" placeholder="..." value={username} onChange={e => setUsername(e.target.value)}/>
+                                </Form.Group>
+                                <Form.Group className="mb-4" controlId="formPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="..." value={password} onChange={e => setPassword(e.target.value)}/>
+                                </Form.Group>
+                                <Form.Group className="mb-4" controlId="formEmail">
+                                    <Form.Label>Email Address</Form.Label>
+                                    <Form.Control type="email" placeholder="..." value={email} onChange={e => setEmail(e.target.value)}/>
+                                </Form.Group>
+                                <Form.Group className="mb-4" controlId="formBirthday">
+                                    <Form.Label>Birthday</Form.Label>
+                                    <Form.Control type="text" placeholder="..." value={birth} onChange={e => setBirth(e.target.value)}/>
+                                </Form.Group>
+                                <Button variant="secondary" type="submit" onClick={handleSubmit}>Register</Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 // propTypes - Give warnings in browser/console if data does not match with the required.
