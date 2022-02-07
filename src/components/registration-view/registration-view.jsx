@@ -96,7 +96,7 @@ export function RegistrationView(props) {
                                 </Form.Group>
                                 <Form.Group className="mb-4" controlId="formBirthday">
                                     <Form.Label>Birthday</Form.Label>
-                                    <Form.Control type="text" placeholder="You dont need to be honest :)" value={birth} onChange={e => setBirth(e.target.value)}/>
+                                    <Form.Control type="date" placeholder="You dont need to be honest :)" value={birth} onChange={e => setBirth(e.target.value)}/>
                                     {/* code added here to display validation error */}
                                     {emailErr && <p>{emailErr}</p>}
                                 </Form.Group>
