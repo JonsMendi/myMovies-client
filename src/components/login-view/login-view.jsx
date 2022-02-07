@@ -49,14 +49,6 @@ export function LoginView(props) {
         }
     };
 
-    const handleRegistration = (e) => {
-        e.preventDefault();
-        console.log(username, password);
-        /* Send a request to the server for authentication */
-        /* then call props.onLoggedIn(username) */
-        props.toRegistrationView(username);
-    };
-
     return (
         <Row className="justify-content-md-center text-center">
             <Col md={5}>
@@ -77,8 +69,6 @@ export function LoginView(props) {
                                     {passwordErr && <p>{passwordErr}</p>}
                             </Form.Group>
                             <Button variant="danger" type="submit" className="mr-2" onClick={handleSubmit}>Submit</Button>
-                            <Button variant="secondary" className="mr-2" type="submit" onClick={handleRegistration}>Register</Button> 
-                            <Button variant="secondary" className="mr-2" type="submit" onClick={handleRegistration}>Logout</Button> 
                         </Form>
                     </Card.Body>
                 </Card>
@@ -88,6 +78,6 @@ export function LoginView(props) {
 }
 // propTypes - Give warnings in browser/console if data does not match with the required.
 LoginView.propTypes = {
-    onLoggedIn: propTypes.func.isRequired,
-    toRegistrationView: propTypes.func//temporarily not required 
+    onLoggedIn: propTypes.func
+    
 }
