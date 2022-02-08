@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 
 export function NavBar({user}) {
