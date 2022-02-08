@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import moment from 'moment';
+
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 
 
@@ -18,14 +19,14 @@ export class ProfileView extends React.Component {
     }
 
     componentDidMount() {
-        const token = localStorage.getItem('token');
-        this.getUser(token);
+        
+        this.getUser();
         console.log(this.props);
     }
 
-    getUser = (token) => {
+    getUser = () => {
         const Username = localStorage.getItem('user');
-        
+        const token = localStorage.getItem('token');
 
         axios.get(`https://mymovies-api-jbm.herokuapp.com/users/${Username}`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -37,7 +38,7 @@ export class ProfileView extends React.Component {
                 Email: response.data.Email,
                 Birth: response.data.Birth,
                 FavoriteMovies: response.data.FavoriteMovies
-            });
+            })
         })
         .catch(function (error) {
             console.log(error);
@@ -140,34 +141,47 @@ export class ProfileView extends React.Component {
 
     render () {
         const { movie } = this.props;
-        const { FavoriteMovies, Username, Password, Email, Birth } = this.state;
-
+        const { FavoriteMovies, Username, Email, Birth } = this.state;
+        
+        
         return (
             <Container className="profile-view" align="center">
+                <Row>
+                    <Col>
+                        <Card border="dark">
+                            <Card.Body >
+                                <Card.Title><h3>{Username}</h3></Card.Title>  
+                                <br/>
+                                <Card.Text>Email: {Email}</Card.Text>
+                                <Card.Text>Birthday: {moment(Birth).format('Do MMMM YYYY')}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
                 <Row className="justify-content-md-center text-center">
                     <Col md={8}>
-                        <Card border="danger" className="mt-5">
+                        <Card border="dark" className="mt-5">
                             <Card.Body>
-                                <Card.Title><h2>{Username} Room</h2></Card.Title>
+                                <Card.Title><h4>Update</h4></Card.Title>
                                 <Form className="form-update">
                                     <Form.Group className="mb-4" controlId="formUsername">
                                         <Form.Label>Username</Form.Label>
-                                        <Form.Control type="text" name="Username" placeholder="New Username" value={Username} onChange={e => this.setUsername(e.target.value)} required/>       
+                                        <Form.Control type="text" name="Username" placeholder="New Username" value={Username || ""} onChange={(e) => this.setUsername(e.target.value)} required/>       
                                     </Form.Group>
                                     <Form.Group className="mb-4" controlId="formPassword">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password" name="Password" placeholder="New Password" value={Password} onChange={e => this.setPassword(e.target.value)} required/>
+                                        <Form.Control type="password" name="Password" placeholder="New Password" value={""} onChange={(e) => this.setPassword(e.target.value)} required/>
                                     </Form.Group>
                                     <Form.Group className="mb-4" controlId="formEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" name="Email" placeholder="New Email" value={Email} onChange={e => this.setEmail(e.target.value)} required/>
+                                        <Form.Control type="email" name="Email" placeholder="New Email" value={Email || ""} onChange={(e) => this.setEmail(e.target.value)} required/>
                                     </Form.Group>
                                     <Form.Group className="mb-4" controlId="formBirth">
                                         <Form.Label>Birthday</Form.Label>
-                                        <Form.Control type="date" name="Birth" value={Birth} onChange={e => this.setBirth(e.target.value)}/>
+                                        <Form.Control type="text" name="Birth" value={moment(Birth || "").format('Do MMMM YYYY')} onChange={(e) => this.setBirth(e.target.value)}/>
                                     </Form.Group>
-                                    <Button variant="danger" type="submit" className="mr-2" onClick={this.updateUser}>Update Profile</Button>
-                                    <Button variant="danger" type="submit" className="mr-2" onClick={this.deleteUser}>Delete Profile</Button>
+                                    <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.updateUser}>Update Profile</Button>
+                                    <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.deleteUser}>Delete Profile</Button>
                                 </Form>
                             </Card.Body>
                         </Card>
@@ -183,12 +197,12 @@ export class ProfileView extends React.Component {
                     { movie.map((movie) => {
                         if(movie._id === FavoriteMovies.find((fv) => fv === movie._id))
                         { return (
-                            <Col>
-                            <Card className="m-2" key={movie._id}  xs={12} md={6} lg={3}>
+                            <Col key={movie._id}>
+                            <Card border="dark" className="m-2"  xs={12} md={6} lg={3}>
                                 <Card.Img className="fav-poster" variant="top" crossOrigin='anonymous' src={movie.ImageUrl}/>
                                 <Card.Body>
                                     <Card.Title className="movie_title">{movie.Title}</Card.Title>
-                                    <Button variant="outline-primary" value={movie._id} onClick={(e) => { this.removeFavoriteMovie(e, movie)}}>Remove</Button>
+                                    <Button variant="outline-danger" value={movie._id} onClick={(e) => { this.removeFavoriteMovie(e, movie)}}>Remove</Button>
                                 </Card.Body>
                             </Card> 
                             </Col>
