@@ -1,14 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Figure, Link } from 'react-bootstrap';
+import { Row, Col, Button, Figure } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      show: true
+    }
+  }
 
-  
 
-  addFavoriteMovie = (e, movie) => {
+  onToggle = (e) => this.setState((currentState) => ({show: !currentState.show}));
+
+  addFavoriteMovie = (e) => {
     e.preventDefault();
     const Username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
@@ -19,15 +26,39 @@ export class MovieView extends React.Component {
     })
     .then((response) => {
       console.log(response);
-            alert('Movie was added to Favorites');
+      alert('Movie was added to Favorites');
+    })
+    .then(()  =>{
+      this.setState.show = false
     })
     .catch(function (error) {
       console.log(error);
     });
   }
 
+  removeFavoriteMovie = (e, movie) => {
+    e.preventDefault();
+    const Username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+
+    axios.delete(`https://mymovies-api-jbm.herokuapp.com/users/${Username}/movies/${movie._id}`, 
+    { 
+        headers: { Authorization: `Bearer ${token}` } 
+    })
+    .then((response) => {
+        console.log(response);
+        alert('Movie was removed');
+        this.componentDidMount();
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
   render() {
     const { movie, actor } = this.props;
+    const { show } = this.state;
+
     
     return (
       <Row className="justify-content-md-center text-center">
@@ -76,8 +107,10 @@ export class MovieView extends React.Component {
             </div>
             <div className="m-4">
               <Link to={`/`}><Button variant='dark'>Back</Button></Link>
-              <Button className="ml-3" variant="primary" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie)}>Add to Favorites</Button>
-            </div>
+              {
+                show? <Button className="ml-3" variant="primary" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie) || this.onToggle(e)}>Add to Favorites</Button>: null
+              }
+                 </div>
           </div>
         </Col>
       </Row>
