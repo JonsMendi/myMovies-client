@@ -58,7 +58,7 @@ export function RegistrationView(props) {
             .then(response => {
                 const data = response.data;
                 console.log(data);
-                alert('You have been successfully registered, please log in.');
+                alert('You have been successfully registered, please login.');
                 window.open('/', '_self');//'_self' to make sure that opens in the same tab instead of another one as is on default.
             })
             .catch(e => {
@@ -98,7 +98,7 @@ export function RegistrationView(props) {
                                     <Form.Label>Birthday</Form.Label>
                                     <Form.Control type="date" placeholder="You dont need to be honest :)" value={birth} onChange={e => setBirth(e.target.value)}/>
                                     {/* code added here to display validation error */}
-                                    {emailErr && <p>{emailErr}</p>}
+                                    {birthErr && <p>{setBirthErr}</p>}
                                 </Form.Group>
                                 <Button variant="secondary" type="submit" onClick={handleSubmit}>Register</Button>
                             </Form>
