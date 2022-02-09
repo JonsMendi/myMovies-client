@@ -145,8 +145,8 @@ export class ProfileView extends React.Component {
         
         
         return (
-            <Container className="profile-view" align="center">
-                <Row>
+            <Container className="profile-view" align="center" lg={2} md={6} xs={12}>
+                <Row className="justify-content-md-center text-center">
                     <Col>
                         <Card border="dark">
                             <Card.Body >
@@ -159,10 +159,10 @@ export class ProfileView extends React.Component {
                     </Col>
                 </Row>
                 <Row className="justify-content-md-center text-center">
-                    <Col md={8}>
+                    <Col>
                         <Card border="dark" className="mt-5">
                             <Card.Body>
-                                <Card.Title><h4>Update</h4></Card.Title>
+                                <Card.Title className="mb-4"><h4>Change Yourself!</h4></Card.Title>
                                 <Form className="form-update">
                                     <Form.Group className="mb-4" controlId="formUsername">
                                         <Form.Label>Username</Form.Label>
@@ -178,7 +178,7 @@ export class ProfileView extends React.Component {
                                     </Form.Group>
                                     <Form.Group className="mb-4" controlId="formBirth">
                                         <Form.Label>Birthday</Form.Label>
-                                        <Form.Control type="text" name="Birth" value={moment(Birth || "").format('Do MMMM YYYY')} onChange={(e) => this.setBirth(e.target.value)}/>
+                                        <Form.Control type="date" name="Birth"  onChange={(e) => this.setBirth(e.target.value)}/>
                                     </Form.Group>
                                     <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.updateUser}>Update Profile</Button>
                                     <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.deleteUser}>Delete Profile</Button>
