@@ -22,7 +22,6 @@ export class MainView extends React.Component {
       this.state = {
         movies: [],
         user: null, //initial state set to null
-        actors: []
       };
     }
 
@@ -69,21 +68,6 @@ export class MainView extends React.Component {
       });
     }
 
-    getActors(token) {
-      axios.get('https://mymovies-api-jbm.herokuapp.com/actors', {
-        headers: { Authorization: `Bearer ${token}`}
-      })
-      .then (response => {
-        //assign the result to set the state.
-        this.setState({
-          actors: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
-
     onLoggedOut() {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
@@ -94,7 +78,7 @@ export class MainView extends React.Component {
 
     // render() renders the code into the virtualDOM 
     render() {
-      const { movies, user, actors } = this.state;
+      const { movies, user } = this.state;
   
       
       return (
@@ -157,9 +141,9 @@ export class MainView extends React.Component {
               if (!user) return <Col>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
-              if (actors.length === 0) return <div className="main-view" />;
+              if (movies.length === 0) return <div className="main-view" />;
               return <Col md={8}>
-                <ActorView actor={actors.find(actor => actor.Name === match.params.ActorName)} onBackClick={() => history.goBack()} />
+                <ActorView actor={movies.find(m => m.Actors === match.params.ActorName)} onBackClick={() => history.goBack()} />
               </Col>
             }} />
             {/*Under Genre endpoint*/}
