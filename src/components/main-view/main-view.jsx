@@ -1,11 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { setMovies, setUser } from '../../actions/actions';
+import MoviesList from '../movies-list/movies-list';
 import { Row, Col, Container } from 'react-bootstrap';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { ProfileView } from '../profile-view/profile-view';
-import { MovieCard } from '../movie-card/movie-card';
+import  ProfileView  from '../profile-view/profile-view';
+//import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -13,16 +16,16 @@ import { ActorView } from '../actor-view/actor-view';
 import { NavBar } from '../nav-bar/nav-bar';
 import './main-view.scss';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
     // constructor() starts before then render.
     // constructor() is the method that React uses to actually create the component in-memory.
     // super() it will call the parent React.Component’s constructor, which will give your class the actual React component’s features.
     constructor() {
       super();
       this.state = {
-        movies: [],
-        user: null, //initial state set to null
+        //user: null, //initial state set to null
       };
+      
     }
 
     componentDidMount(){
@@ -59,9 +62,7 @@ export class MainView extends React.Component {
       })
       .then (response => {
         //assign the result to set the state.
-        this.setState({
-          movies: response.data
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -76,9 +77,12 @@ export class MainView extends React.Component {
       });
     }
 
+   
+
     // render() renders the code into the virtualDOM 
     render() {
-      const { movies, user } = this.state;
+      const { user } = this.state;
+      const { movies } = this.props;
   
       
       return (
@@ -94,11 +98,9 @@ export class MainView extends React.Component {
               // Under, if there is no movies in the list it activates the condition and shows empty page.
               if (movies.length === 0) return <div className="main-view" />;
               // Under Show All Movies - If the previous If statements are ignored (user is Logged and there is Movies in the list) a mapping will be made and show all movies.
-              return movies.map(m => (
-                <Col md={3} key={m._id}>
-                  <MovieCard movie={m} />
-                </Col>
-              ))
+              return (
+                  <MoviesList movies={movies} /> 
+              )
             }} />
             {/*Under Login endpoint*/}
             <Route path="/login" render= {() => {
@@ -170,3 +172,9 @@ export class MainView extends React.Component {
       );
     }
 }
+
+let mapStateToProps = state => {
+  return { movies: state.movies, user: state.user }
+}
+
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
