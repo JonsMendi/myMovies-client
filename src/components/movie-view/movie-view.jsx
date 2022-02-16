@@ -1,19 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { setUser, setMovies } from '../../actions/actions';
 import { Row, Col, Button, Figure } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
-export class MovieView extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      show: true
-    }
-  }
-
-
-  onToggle = (e) => this.setState((currentState) => ({show: !currentState.show}));
+class MovieView extends React.Component {
+  
 
   addFavoriteMovie = (e) => {
     e.preventDefault();
@@ -27,9 +21,7 @@ export class MovieView extends React.Component {
     .then((response) => {
       console.log(response);
       alert('Movie was added to Favorites');
-    })
-    .then(()  =>{
-      this.setState.show = false
+      this.props.setUser(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -48,7 +40,7 @@ export class MovieView extends React.Component {
     .then((response) => {
         console.log(response);
         alert('Movie was removed');
-        this.componentDidMount();
+        this.props.setUser(response.data);
     })
     .catch(function (error) {
         console.log(error);
@@ -56,8 +48,8 @@ export class MovieView extends React.Component {
 }
 
   render() {
-    const { movie, actor } = this.props;
-    const { show } = this.state;
+    const { movie, actor, user } = this.props;
+
 
     
     return (
@@ -107,9 +99,7 @@ export class MovieView extends React.Component {
             </div>
             <div className="m-4">
               <Link to={`/`}><Button variant='dark'>Back</Button></Link>
-              {
-                show? <Button className="ml-3" variant="primary" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie) || this.onToggle(e)}>Add to Favorites</Button>: null
-              }
+              <Button className="ml-3" variant="primary" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie)}>Add to Favorites</Button>
                  </div>
           </div>
         </Col>
@@ -117,6 +107,13 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return { userData: state.userData, movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setUser, setMovies })(MovieView);
+
 
 // propTypes - Give warnings in browser/console if data does not match with the required.
 MovieView.propTypes = {
