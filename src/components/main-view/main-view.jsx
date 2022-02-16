@@ -9,7 +9,7 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import  ProfileView  from '../profile-view/profile-view';
 //import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
+import  MovieView  from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ActorView } from '../actor-view/actor-view';
@@ -32,11 +32,13 @@ class MainView extends React.Component {
       // code executed right after the component is added to the DOM.
       // is a good place to add code for performing async tasks such as making ajax requests or adding event listeners(ex: fetch the list of movies from your database).
       // Under, every time a user loads the page and the componentDidMount method is called, you check if the user is logged in (by retrieving this information from localStorage). Only if the user is already logged in do you make the same GET request to the “movies” endpoint (by calling the getMovies method).
+      if (!this.props.user.Username && localStorage.getItem('token')) {
+        let user = localStorage.getItem('user');
+        let token = localStorage.getItem('token');
+        this.getUser(token, user);
+      }
       let accessToken = localStorage.getItem('token');
       if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
         this.getMovies(accessToken);
       }
     }
@@ -46,9 +48,7 @@ class MainView extends React.Component {
     //If !user it activates this method. Goes to LoginView.
     onLoggedIn(authData) {
       console.log(authData);
-      this.setState({
-        user: authData.user.Username
-      });
+      this.props.setUser(authData.user);
       //'localStorage'Tis a mechanism that stores the token and the logged in user in the browser, so that the next time you open your app, the browser remembers you’re already logged in. 
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
@@ -72,22 +72,39 @@ class MainView extends React.Component {
     onLoggedOut() {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      this.setState({
-        user: null
-      });
+      this.props.setUser(null);
     }
 
-   
+    getUser = () => {
+      const Username = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+
+      axios.get(`https://mymovies-api-jbm.herokuapp.com/users/${Username}`, {
+          headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(response => {
+          this.props.setUser({
+              Username: response.data.Username,
+              Password: response.data.Password,
+              Email: response.data.Email,
+              Birth: response.data.Birth,
+              FavoriteMovies: response.data.FavoriteMovies
+          })
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
+  }
 
     // render() renders the code into the virtualDOM 
     render() {
-      const { user } = this.state;
-      const { movies } = this.props;
+      
+      const { movies, user } = this.props;
   
       
       return (
         <Router>
-          <NavBar user={user}/>
+          <NavBar user={user ? user.Username : null}/>
           <Container>
           <Row className="justify-content-md-center main-view">
             <Route exact path="/" render= {() => {
@@ -99,7 +116,7 @@ class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
               // Under Show All Movies - If the previous If statements are ignored (user is Logged and there is Movies in the list) a mapping will be made and show all movies.
               return (
-                  <MoviesList movies={movies} /> 
+                  <MoviesList movies={movies} user={user} /> 
               )
             }} />
             {/*Under Login endpoint*/}
@@ -160,10 +177,10 @@ class MainView extends React.Component {
               </Col>
             }} />
             {/*Under Profile endpoint*/}
-            <Route path={`/users/${user}`} render= {({ history }) => {
+            <Route path={`/users`} render= {({ history }) => {
               if (!user) return <Redirect to="/" />
               return <Col lg={8} md={8}>
-                <ProfileView movie={movies} user={user} onBackClick={() => history.goBack()} />
+                <ProfileView  onBackClick={() => history.goBack()} />
               </Col>
             }} />
           </Row>
