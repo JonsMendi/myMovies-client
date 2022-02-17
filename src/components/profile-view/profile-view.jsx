@@ -10,6 +10,7 @@ import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 
 
 class ProfileView extends React.Component {
+
     constructor() {
         super();
         this.state = {
@@ -18,15 +19,15 @@ class ProfileView extends React.Component {
             //Email: null,
             //Birth: null,
             //FavoriteMovies: [],
+            baseUrl: 'http://localhost:8080',
             
         };
-        const baseUrl='localhost:8080'
+        //baseUrl='localhost:8080';
     }
 
     componentDidMount() {
-        
         this.getUser();
-        console.log(this.props);
+        console.log('this.props', this.props);
     }
 
     getUser = () => {
@@ -37,7 +38,7 @@ class ProfileView extends React.Component {
             headers: { Authorization: `Bearer ${token}` },
         })
         .then(response => {
-            this.setState({
+            this.props.setUser({
                 Username: response.data.Username,
                 Password: response.data.Password,
                 Email: response.data.Email,
@@ -58,13 +59,15 @@ class ProfileView extends React.Component {
             'Password', this.state.Password,
             'Email', this.state.Email,
             'Birth', this.state.Birth)
-        axios.put(`https://mymovies-api-jbm.herokuapp.com/users/${Username}`, {
+        axios.put(`${this.state.baseUrl}/users/${Username}`, {
             Username: this.state.Username,
             Password: this.state.Password,
             Email: this.state.Email,
             Birth: this.state.Birth
         }, { headers: { Authorization: `Bearer ${token}` }, })
         .then((response) => {
+            console.log('response', response);
+            alert('Profile was successfully updated');
             this.setState({
                 Username: response.data.Username,
                 Password: response.data.Password,
@@ -72,7 +75,7 @@ class ProfileView extends React.Component {
                 Birth: response.data.Birth
             });
             localStorage.setItem('user', data.Username)
-            alert('Profile was successfully updated');
+           
             window.location.pathname = "/";
         })
         .catch(function (error) {
