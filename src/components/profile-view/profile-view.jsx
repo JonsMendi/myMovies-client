@@ -23,6 +23,33 @@ class ProfileView extends React.Component {
         const baseUrl='localhost:8080'
     }
 
+    componentDidMount() {
+        
+        this.getUser();
+        console.log(this.props);
+    }
+
+    getUser = () => {
+        const Username = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+
+        axios.get(`https://mymovies-api-jbm.herokuapp.com/users/${Username}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(response => {
+            this.props.setUser({
+                Username: response.data.Username,
+                Password: response.data.Password,
+                Email: response.data.Email,
+                Birth: response.data.Birth,
+                FavoriteMovies: response.data.FavoriteMovies
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
     updateUser = (e) => {
         e.preventDefault();
         const Username = localStorage.getItem('user');
@@ -31,7 +58,7 @@ class ProfileView extends React.Component {
             'Password', this.state.Password,
             'Email', this.state.Email,
             'Birth', this.state.Birth)
-        axios.put(`${baseUrl}/users/${Username}`, {
+        axios.put(`https://mymovies-api-jbm.herokuapp.com/users/${Username}`, {
             Username: this.state.Username,
             Password: this.state.Password,
             Email: this.state.Email,
