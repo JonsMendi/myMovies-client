@@ -11,20 +11,20 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
   console.log(movie);
     return (
-      
-      <Card className="card-view card text-center shadow m-1 mb-4">
-        <Link className="card-click" to={`/movies/${movie._id}`}>
+
+      <Link className="card-click" to={`/movies/${movie._id}`}>
           <Button variant="none"> 
-          <div className="overflow">
-            <Card.Img className="card-img" variant="top" crossOrigin='anonymous' src={movie.ImageUrl} />
+      <Card className="movie-card-view card text-center shadow m-1 mb-4 overflow ">
+          <div className="card-img">
+            <Card.Img variant="top" crossOrigin='anonymous' src={movie.ImageUrl} />
           </div>
-        </Button>
-        </Link>
         <Card.Body className="card-body">
           <Card.Title><h4>{movie.Title}</h4></Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
         </Card.Body>
       </Card>
+       </Button>
+        </Link>
     )
   }
 }

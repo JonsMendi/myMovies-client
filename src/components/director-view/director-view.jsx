@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, Col, Row, Card } from 'react-bootstrap';
 import './director-view.scss';
 
 export function DirectorView (props) {
     const { director } = props;
+    const goHistory = useHistory();
 
     return (
-        <Row>
+        <Row className="justify-content-md-center text-center">
             <Col>
                 <Card>
                     <Card.Body>
@@ -29,7 +30,8 @@ export function DirectorView (props) {
                             <span className="label">Death: </span>
                             <span className="value"><p>{director.Death}</p></span>
                             </div>
-                            <Link to={`/`}><Button variant='dark'>Back</Button></Link>
+                            <Button variant="primary mr-3" onClick={goHistory.goBack}>Back</Button>
+                            <Link to={`/`}><Button variant='dark'>Movies List</Button></Link>
                         </div>
                     </Card.Body>
                 </Card>
