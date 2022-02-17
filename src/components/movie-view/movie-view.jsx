@@ -1,19 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Figure } from 'react-bootstrap';
+import { Row, Col, Button, Figure, Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      show: true
-    }
-  }
-
-
-  onToggle = (e) => this.setState((currentState) => ({show: !currentState.show}));
 
   addFavoriteMovie = (e) => {
     e.preventDefault();
@@ -27,9 +18,6 @@ export class MovieView extends React.Component {
     .then((response) => {
       console.log(response);
       alert('Movie was added to Favorites');
-    })
-    .then(()  =>{
-      this.setState.show = false
     })
     .catch(function (error) {
       console.log(error);
@@ -57,22 +45,13 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, actor } = this.props;
-    const { show } = this.state;
 
     
     return (
       <Row className="justify-content-md-center text-center">
         <Col>
-          <Figure>
-            <Figure.Image
-              width={270}
-              height={320}
-              alt="171x180"
-              crossOrigin='anonymous'
-              src={movie.ImageUrl}
-            />
-          </Figure>
-          <div className="movie-view">
+          <Card className="movie-view" border="danger">
+          <Card.Body>
             <div className="movie-title">
               <span className="label"></span>
               <span className="value"><h2>{movie.Title}</h2></span>
@@ -101,17 +80,12 @@ export class MovieView extends React.Component {
               <span className="label">Rating: </span>
               <span className="value">{movie.Rating}/10</span>
             </div>
-            <div className="movie-featured">
-              <span className="label">Featured: </span>
-              <span className="value">{movie.Featured}</span>
-            </div>
-            <div className="m-4">
-              <Link to={`/`}><Button variant='dark'>Back</Button></Link>
-              {
-                show? <Button className="ml-3" variant="primary" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie) || this.onToggle(e)}>Add to Favorites</Button>: null
-              }
-                 </div>
-          </div>
+              <div className="m-4">
+                <Link to={`/`}><Button variant='dark'>Back</Button></Link>
+                <Button className="ml-3" variant="danger" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie)}>Add to Favorites</Button>
+              </div>
+          </Card.Body>
+          </Card>
         </Col>
       </Row>
     );
