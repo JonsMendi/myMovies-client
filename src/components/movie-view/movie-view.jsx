@@ -48,41 +48,24 @@ export class MovieView extends React.Component {
 
     
     return (
-      <Row className="justify-content-md-center text-center">
-        <Col>
-          <Card className="movie-view" border="danger">
-          <Card.Body>
-            <div className="movie-title">
-              <span className="label"></span>
-              <span className="value"><h2>{movie.Title}</h2></span>
-            </div>
-            <div className="movie-description">
-              <span className="label">Description: </span>
-              <span className="value">{movie.Description}</span>
-            </div>
-            <div className="movie-releaseYear">
-              <span className="label">Release Year: </span>
-              <span className="value">{movie.ReleaseYear}</span>
-            </div>
-            <div className="movie-genre">
-              <span className="label">Genre: </span>
-              <Link to={`/genres/${movie.Genre.Name}`}><Button variant="link">Genre</Button></Link>
-            </div>
-            <div className="movie-director">
-              <span className="label">Director: </span>
-              <Link to={`/directors/${movie.Director.Name}`}><Button variant="link">Director</Button></Link>
-            </div>
-            <div className="movie-actor">
-              <span className="label">Actors: </span>
-              <Link to={`/actors/${actor}`}><Button variant="link">Actor</Button></Link>
-            </div>
-            <div className="movie-rating">
-              <span className="label">Rating: </span>
-              <span className="value">{movie.Rating}/10</span>
-            </div>
-              <div className="m-4">
-                <Link to={`/`}><Button variant='dark'>Back</Button></Link>
-                <Button className="ml-3" variant="danger" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie)}>Add to Favorites</Button>
+      
+      <Row className="mt-4 mx-auto" style={{ width: "60%" }}>
+        <Col lg={12} md={5} sm={12}>
+          <Card className="movie-view bg-dark " border="white">
+          <Card.Header as="h3" className="text-center">{movie.Title}</Card.Header>
+          
+          <Card.Img variant="right" crossOrigin='anonymous' src={movie.ImageUrl} style={{ height: 520, }} />
+
+          <Card.Body className="bg-black">
+            <Card.Text>Description: {movie.Description}</Card.Text>
+            <Card.Text>Release Year: {movie.ReleaseYear}</Card.Text>
+            <Card.Text>Rating: {movie.Rating}/10</Card.Text>
+            <Card.Text><Link to={`/genres/${movie.Genre.Name}`}><Button variant="dark link">Genre: {movie.Genre.Name}</Button></Link></Card.Text>
+            <Card.Text><Link to={`/directors/${movie.Director.Name}`}><Button variant="dark link">Director: {movie.Director.Name}</Button></Link></Card.Text>
+            {/*<Card.Text>Actor: <Link to={`/actors/${actor}`}><Button variant="link">{movie.Actor}</Button></Link></Card.Text>*/}
+              <div className="m-4 text-center">
+                <Link to={`/`}><Button variant='outline-secondary'>Back</Button></Link>
+                <Button className="ml-3" variant="outline-danger" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie)}>Add to Favorites</Button>
               </div>
           </Card.Body>
           </Card>

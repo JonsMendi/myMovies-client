@@ -11,7 +11,7 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
   console.log(movie);
     return (
-
+      
       <Link className="card-click" to={`/movies/${movie._id}`}>
           <Button variant="none"> 
       <Card className="movie-card-view card text-center shadow m-1 mb-4 overflow ">

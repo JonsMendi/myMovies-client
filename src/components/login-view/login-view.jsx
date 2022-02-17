@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import propTypes from 'prop-types';
 import { Row, Col, Card, Form, Button} from 'react-bootstrap';
@@ -78,6 +79,11 @@ export function LoginView(props) {
 }
 // propTypes - Give warnings in browser/console if data does not match with the required.
 LoginView.propTypes = {
-    onLoggedIn: propTypes.func
-    
+    onLoggedIn: propTypes.func.isRequired
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    handleSubmit: (username, password) => dispatch(handleSubmit(username, password))
+  });
+  
+  export default connect(null, mapDispatchToProps)(LoginView);

@@ -20,16 +20,16 @@ export function NavBar({user}) {
     };
 
     return (
-        <Navbar className="main-nav mb-5 pb-3" sticky="top" bg="dark" variant="dark" expand="lg">
-            <Container>
-                <Navbar.Brand href="/">MyMovies</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar className="main-nav mb-5 pb-3 bg-danger" border="primary" sticky="top" variant="light" expand="lg">
+            <Container className="bg-danger">
+                <Navbar.Brand className="text-white" href="/">MyMovies</Navbar.Brand>
+                <Navbar.Toggle  aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse className="bg-danger" id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                    {isAuth() && (<Nav.Link href={`/users/${user}`}>{user}</Nav.Link>)}
-                    {isAuth() && (<Button variant="link" onClick={() => {onLoggedOut() }}>Logout</Button>)}
-                    {!isAuth() && (<Nav.Link href="/">Sign-in</Nav.Link>)}
-                    {!isAuth() && (<Nav.Link href="/register">Sign-up</Nav.Link>)}
+                    {isAuth() && (<Nav.Link className="bg-danger" href={`/users/${user}`}>{user}</Nav.Link>)}
+                    {isAuth() && (<Button className="bg-danger" variant="link" onClick={() => {onLoggedOut() }}>Logout</Button>)}
+                    {!isAuth() && (<Nav.Link className="bg-danger" href="/">Sign-in</Nav.Link>)}
+                    {!isAuth() && (<Nav.Link className="bg-danger" href="/register">Sign-up</Nav.Link>)}
                 </Nav>
                 </Navbar.Collapse>
             </Container>
