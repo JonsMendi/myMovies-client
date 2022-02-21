@@ -5,10 +5,6 @@
 - Using React, build the client-side for an **Movie Application** based on its existing
   server-side code (REST API and database) "movies-api".
 
-## Project:
-
-Project-live :
-
 ## App Essential Views and Features
 
 - **REGISTER VIEW**
