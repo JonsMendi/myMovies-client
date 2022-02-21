@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './registration-view.scss';
 import { Container, Row, Col, Card,Form, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -71,10 +71,10 @@ export function RegistrationView(props) {
     return (
         <Container>
             <Row className='justify-content-md-center text-center'>
-                <Col md={5}>
-                    <Card border="danger" className="mt-5">
+                <Col lg={9} md={8} sm={8}>
+                    <Card border="white" className="mt-5">
                         <Card.Body>
-                        <Card.Title className="mb-4"><h3>Register here brother!</h3></Card.Title>
+                        <Card.Title className="mb-4"><h3>Register here!</h3></Card.Title>
                             <Form>
                                 <Form.Group className="mb-4" controlId="formUsername">
                                     <Form.Label>Username</Form.Label>
@@ -100,7 +100,7 @@ export function RegistrationView(props) {
                                     {/* code added here to display validation error */}
                                     {birthErr && <p>{setBirthErr}</p>}
                                 </Form.Group>
-                                <Button variant="secondary" type="submit" onClick={handleSubmit}>Register</Button>
+                                <Button variant="outline-light" type="submit" onClick={handleSubmit}>Register</Button>
                             </Form>
                         </Card.Body>
                     </Card>
@@ -111,5 +111,10 @@ export function RegistrationView(props) {
 }
 // propTypes - Give warnings in browser/console if data does not match with the required.
 RegistrationView.propTypes = {
-    onRegister: propTypes.func//temporarily not required 
+    register: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+    }),
+    onRegister: PropTypes.func,
 }

@@ -14,15 +14,15 @@ class ProfileView extends React.Component {
     constructor() {
         super();
         this.state = {
-            //Username: null,
-            //Password: null,
-            //Email: null,
-            //Birth: null,
-            //FavoriteMovies: [],
-            baseUrl: 'http://localhost:8080',
+            Username: null,
+            Password: null,
+            Email: null,
+            Birth: null,
+            FavoriteMovies: [],
+            //baseUrl: 'http://localhost:8080',
             
         };
-        //baseUrl='localhost:8080';
+        
     }
 
     componentDidMount() {
@@ -38,7 +38,7 @@ class ProfileView extends React.Component {
             headers: { Authorization: `Bearer ${token}` },
         })
         .then(response => {
-            this.props.setUser({
+            this.setState({
                 Username: response.data.Username,
                 Password: response.data.Password,
                 Email: response.data.Email,
@@ -59,7 +59,7 @@ class ProfileView extends React.Component {
             'Password', this.state.Password,
             'Email', this.state.Email,
             'Birth', this.state.Birth)
-        axios.put(`${this.state.baseUrl}/users/${Username}`, {
+        axios.put(`https://mymovies-api-jbm.herokuapp.com/users/${Username}`, {
             Username: this.state.Username,
             Password: this.state.Password,
             Email: this.state.Email,
@@ -99,7 +99,6 @@ class ProfileView extends React.Component {
         .then(() => {
             localStorage.removeItem('user');
             localStorage.removeItem('token');
-            this.props.setUser({});
             alert('Profile successfully deleted');
             window.location.pathname = "/";
         })
@@ -153,9 +152,10 @@ class ProfileView extends React.Component {
 
     render () {
         const { movies, user } = this.props;
+        const { FavoriteMovies, Username, Email, Birth } = this.state;
         console.log('my profile user action', user);
         //const { FavoriteMovies } = this.state;
-        //const favoriteMovie = user.FavoriteMovies.map((movieId) => movies.find((movie) => movie._id === movieId));
+        const favoriteMovie = FavoriteMovies.map((movieId) => movies.find((movie) => movie._id === movieId));
         //console.log('My favoriteMovie fetch',favoriteMovie);
         
         return (
@@ -164,10 +164,10 @@ class ProfileView extends React.Component {
                     <Col>
                         <Card border="dark">
                             <Card.Body >
-                                <Card.Title><h3>{user.Username}</h3></Card.Title>  
+                                <Card.Title><h3>{Username}</h3></Card.Title>  
                                 <br/>
-                                <Card.Text>Email: {user.Email}</Card.Text>
-                                <Card.Text>Birthday: {moment(user.Birth).format('Do MMMM YYYY')}</Card.Text>
+                                <Card.Text>Email: {Email}</Card.Text>
+                                <Card.Text>Birthday: {moment(Birth).format('Do MMMM YYYY')}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -180,7 +180,7 @@ class ProfileView extends React.Component {
                                 <Form className="form-update">
                                     <Form.Group className="mb-4" controlId="formUsername">
                                         <Form.Label>Username</Form.Label>
-                                        <Form.Control type="text" name="Username" placeholder={this.props.user.Username}  onChange={(e) => this.setUsername(e.target.value)} required/>       
+                                        <Form.Control type="text" name="Username" placeholder={this.state.Username}  onChange={(e) => this.setUsername(e.target.value)} required/>       
                                     </Form.Group>
                                     <Form.Group className="mb-4" controlId="formPassword">
                                         <Form.Label>Password</Form.Label>
@@ -188,11 +188,11 @@ class ProfileView extends React.Component {
                                     </Form.Group>
                                     <Form.Group className="mb-4" controlId="formEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" name="Email" placeholder={this.props.user.Email} onChange={(e) => this.setEmail(e.target.value)} required/>
+                                        <Form.Control type="email" name="Email" placeholder={this.state.Email} onChange={(e) => this.setEmail(e.target.value)} required/>
                                     </Form.Group>
                                     <Form.Group className="mb-4" controlId="formBirth">
                                         <Form.Label>Birthday</Form.Label>
-                                        <Form.Control type="date" name="Birth" placeholder={this.props.user.Birth}  onChange={(e) => this.setBirth(e.target.value)}/>
+                                        <Form.Control type="date" name="Birth" placeholder={this.state.Birth}  onChange={(e) => this.setBirth(e.target.value)}/>
                                     </Form.Group>
                                     <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.updateUser}>Update Profile</Button>
                                     <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.deleteUser}>Delete Profile</Button>
@@ -208,7 +208,7 @@ class ProfileView extends React.Component {
                 </Row>
                 <Row className="favorite-movies">
                     {/*Under created a logic to generate the movies*/}
-                    {/*{favoriteMovie && favoriteMovie.map(m => (
+                    {favoriteMovie.map(m => (
                     <Col md={4} key={m._id}>
                         <Row>
                         <MovieCard movie={m} />
@@ -217,7 +217,7 @@ class ProfileView extends React.Component {
                             <Button variant="outline-danger" value={m._id} onClick={(e) => { this.removeFavoriteMovie(e, m)}}>Remove</Button>
                         </Row>
                     </Col>
-                    ))}*/}
+                    ))}
                </Row>
             </Container>
         );

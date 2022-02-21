@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import axios from 'axios';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Row, Col, Card, Form, Button} from 'react-bootstrap';
 import './login-view.scss'
 
@@ -52,8 +51,8 @@ export function LoginView(props) {
 
     return (
         <Row className="justify-content-md-center text-center">
-            <Col md={5}>
-                <Card border="danger" className="mt-5">
+            <Col lg={9} md={8} sm={8}>
+                <Card border="white" className="mt-5">
                     <Card.Body>
                         <Card.Title><h1>Welcome to MyMovies</h1></Card.Title>
                         <Form>
@@ -69,7 +68,7 @@ export function LoginView(props) {
                                  {/* code added here to display validation error */}
                                     {passwordErr && <p>{passwordErr}</p>}
                             </Form.Group>
-                            <Button variant="danger" type="submit" className="mr-2" onClick={handleSubmit}>Submit</Button>
+                            <Button variant="outline-light" type="submit" className="mr-2" onClick={handleSubmit}>Submit</Button>
                         </Form>
                     </Card.Body>
                 </Card>
@@ -79,11 +78,9 @@ export function LoginView(props) {
 }
 // propTypes - Give warnings in browser/console if data does not match with the required.
 LoginView.propTypes = {
-    onLoggedIn: propTypes.func.isRequired
+    user: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired
+      }),
+    onLoggedIn: PropTypes.func.isRequired
 }
-
-const mapDispatchToProps = (dispatch) => ({
-    handleSubmit: (username, password) => dispatch(handleSubmit(username, password))
-  });
-  
-  export default connect(null, mapDispatchToProps)(LoginView);

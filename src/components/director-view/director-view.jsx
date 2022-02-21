@@ -33,7 +33,7 @@ export function DirectorView (props) {
                             </div>
                             <div className="text-center align-items-end pt-4">
                                 <Button variant="outline-secondary mr-3" onClick={goHistory.goBack}>Back</Button>
-                                <Link to={`/`}><Button variant='outline-danger'>Movies List</Button></Link>
+                                <Link to={`/`}><Button variant='outline-light'>Movies List</Button></Link>
                             </div>
                         </div>
                     </Card.Body>

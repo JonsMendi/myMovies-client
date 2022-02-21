@@ -20,7 +20,7 @@ export function GenreView (props) {
                         <span className="value"><p>{genre.Description}</p></span>
                         </div>
                         <Button variant="outline-secondary mr-3" onClick={goHistory.goBack}>Back</Button>
-                        <Link to={`/`}><Button variant="outline-danger">Movies List</Button></Link>
+                        <Link to={`/`}><Button variant="outline-light">Movies List</Button></Link>
                     </div>
                 </Card.Body>
             </Card>

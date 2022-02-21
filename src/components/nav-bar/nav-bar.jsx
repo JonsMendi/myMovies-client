@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import './nav-bar.scss';
 
 export function NavBar({user}) {
     
@@ -20,16 +21,16 @@ export function NavBar({user}) {
     };
 
     return (
-        <Navbar className="main-nav mb-5 pb-3 bg-danger" border="primary" sticky="top" variant="light" expand="lg">
-            <Container className="bg-danger">
+        <Navbar className="main-nav project-jo mb-5 pb-3" border="primary" sticky="top" variant="light" expand="lg">
+            <Container className="bg-dark">
                 <Navbar.Brand className="text-white" href="/">MyMovies</Navbar.Brand>
                 <Navbar.Toggle  aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse className="bg-danger" id="responsive-navbar-nav">
+                <Navbar.Collapse className="bg-dark" id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                    {isAuth() && (<Nav.Link className="bg-danger" href={`/users/${user}`}>{user}</Nav.Link>)}
-                    {isAuth() && (<Button className="bg-danger" variant="link" onClick={() => {onLoggedOut() }}>Logout</Button>)}
-                    {!isAuth() && (<Nav.Link className="bg-danger" href="/">Sign-in</Nav.Link>)}
-                    {!isAuth() && (<Nav.Link className="bg-danger" href="/register">Sign-up</Nav.Link>)}
+                    {isAuth() && (<Nav.Link className="bg-dark"  href={`/users/${user}`}>{user}</Nav.Link>)}
+                    {isAuth() && (<Button className="bg-dark"  variant="link" onClick={() => {onLoggedOut() }}>Logout</Button>)}
+                    {!isAuth() && (<Nav.Link className="bg-dark" href="/">Sign-in</Nav.Link>)}
+                    {!isAuth() && (<Nav.Link className="bg-dark" href="/register">Sign-up</Nav.Link>)}
                 </Nav>
                 </Navbar.Collapse>
             </Container>

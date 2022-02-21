@@ -50,11 +50,11 @@ export class MovieView extends React.Component {
     return (
       
       <Row className="mt-4 mx-auto" style={{ width: "60%" }}>
-        <Col lg={12} md={5} sm={12}>
+        <Col lg={12} md={12} sm={12}>
           <Card className="movie-view bg-dark " border="white">
           <Card.Header as="h3" className="text-center">{movie.Title}</Card.Header>
           
-          <Card.Img variant="right" crossOrigin='anonymous' src={movie.ImageUrl} style={{ height: 520, }} />
+          <Card.Img variant="right" crossOrigin='anonymous' src={movie.ImageUrl}  />
 
           <Card.Body className="bg-black">
             <Card.Text>Description: {movie.Description}</Card.Text>
@@ -65,7 +65,7 @@ export class MovieView extends React.Component {
             {/*<Card.Text>Actor: <Link to={`/actors/${actor}`}><Button variant="link">{movie.Actor}</Button></Link></Card.Text>*/}
               <div className="m-4 text-center">
                 <Link to={`/`}><Button variant='outline-secondary'>Back</Button></Link>
-                <Button className="ml-3" variant="outline-danger" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie)}>Add to Favorites</Button>
+                <Button className="m-3" variant="outline-light" value={movie._id} onClick={(e) => this.addFavoriteMovie(e, movie)}>Add to Favorites</Button>
               </div>
           </Card.Body>
           </Card>
