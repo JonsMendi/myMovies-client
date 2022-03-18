@@ -213,7 +213,7 @@ class ProfileView extends React.Component {
                         <Row>
                         <MovieCard movie={m} />
                         </Row>
-                        <Row>
+                        <Row className='justify-content-md-center'>
                             <Button variant="outline-danger" value={m._id} onClick={(e) => { this.removeFavoriteMovie(e, m)}}>Remove</Button>
                         </Row>
                     </Col>
