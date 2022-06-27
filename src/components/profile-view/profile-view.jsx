@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { setUser, setMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {MovieCard} from '../movie-card/movie-card';
+import './profile-view.scss';
 
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 
@@ -164,8 +166,9 @@ class ProfileView extends React.Component {
                     <Col>
                         <Card border="dark">
                             <Card.Body >
-                                <Card.Title><h3>{Username}</h3></Card.Title>  
+                                <Card.Title><h3>Profile</h3></Card.Title>  
                                 <br/>
+                                <Card.Text>Username: {Username}</Card.Text>
                                 <Card.Text>Email: {Email}</Card.Text>
                                 <Card.Text>Birthday: {moment(Birth).format('Do MMMM YYYY')}</Card.Text>
                             </Card.Body>
@@ -194,8 +197,8 @@ class ProfileView extends React.Component {
                                         <Form.Label>Birthday</Form.Label>
                                         <Form.Control type="date" name="Birth" placeholder={this.state.Birth}  onChange={(e) => this.setBirth(e.target.value)}/>
                                     </Form.Group>
-                                    <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.updateUser}>Update Profile</Button>
-                                    <Button variant="outline-danger" type="submit" className="mr-2" onClick={this.deleteUser}>Delete Profile</Button>
+                                    <Button  type="submit" className="mr-2 update-button" onClick={this.updateUser}>Update Profile</Button>
+                                    <Button  type="submit" className="mr-2 delete-button" onClick={this.deleteUser}>Delete Profile</Button>
                                 </Form>
                             </Card.Body>
                         </Card>
@@ -211,11 +214,13 @@ class ProfileView extends React.Component {
                     {favoriteMovie.map(m => (
                     <Col md={4} key={m._id}>
                         <Row>
-                        <MovieCard movie={m} />
+                             <Button className='delete-button ml-1 mt-3' value={m._id} onClick={(e) => { this.removeFavoriteMovie(e, m)}}>Remove</Button>
+                            <Link to={`/movies/${m._id}`}>
+                                <h5 className="movie-link link ">{m.Title}</h5>
+                            </Link>
                         </Row>
-                        <Row className='justify-content-md-center'>
-                            <Button variant="outline-danger" value={m._id} onClick={(e) => { this.removeFavoriteMovie(e, m)}}>Remove</Button>
-                        </Row>
+                        
+                        
                     </Col>
                     ))}
                </Row>

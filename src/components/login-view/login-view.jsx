@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Row, Col, Card, Form, Button} from 'react-bootstrap';
 import './login-view.scss'
 
@@ -54,22 +55,28 @@ export function LoginView(props) {
             <Col lg={9} md={8} sm={8}>
                 <Card border="white" className="mt-5">
                     <Card.Body>
-                        <Card.Title><h1>Welcome to MyMovies</h1></Card.Title>
+                        <Card.Title><h1>Login into MyMovies</h1></Card.Title>
                         <Form>
                             <Form.Group className="mb-4" controlId="formUsername">
                                 <Form.Label>Username</Form.Label>
-                                <Form.Control type="text" placeholder="..." value={username} onChange={e => setUsername(e.target.value)}/>
+                                <Form.Control type="text" placeholder="Enter Username" value={username} onChange={e => setUsername(e.target.value)}/>
                                 {/* code added here to display validation error */}
                                     {usernameErr && <p>{usernameErr}</p>}
                             </Form.Group>
                             <Form.Group className="mb-4" controlId="formPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="..." value={password} onChange={e => setPassword(e.target.value)}/>
+                                <Form.Control type="password" placeholder="Enter Password" value={password} onChange={e => setPassword(e.target.value)}/>
                                  {/* code added here to display validation error */}
                                     {passwordErr && <p>{passwordErr}</p>}
                             </Form.Group>
-                            <Button variant="outline-light" type="submit" className="mr-2" onClick={handleSubmit}>Submit</Button>
+                            <Button type="submit" className="mr-2 mt-3 login-button" onClick={handleSubmit}>Submit</Button>
                         </Form>
+                        <Row className="d-flex align-items-center justify-content-center mt-3">
+                            <span>Don't you have account?</span>
+                            <Link to={`/register`}>
+                                <Button variant="link" className="sign-up-link btn-lg" type="submit">Sign up</Button>
+                            </Link>
+                        </Row>
                     </Card.Body>
                 </Card>
             </Col>

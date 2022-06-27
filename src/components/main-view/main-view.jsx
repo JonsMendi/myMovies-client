@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link, RouterLink } from 'react-router-dom';
 import { setMovies, setUser } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Navbar, Button } from 'react-bootstrap';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import  ProfileView  from '../profile-view/profile-view';
@@ -13,7 +13,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ActorView } from '../actor-view/actor-view';
-import { NavBar } from '../nav-bar/nav-bar';
+//import { NavBar } from '../nav-bar/nav-bar';
 import './main-view.scss';
 
 class MainView extends React.Component {
@@ -77,6 +77,11 @@ class MainView extends React.Component {
       });
     }
 
+  onLoggedOut = () => {
+      localStorage.clear();
+      window.open("/", "_self")
+  }
+
    
 
     // render() renders the code into the virtualDOM 
@@ -87,7 +92,16 @@ class MainView extends React.Component {
       
       return (
         <Router>
-          <NavBar user={user}/>
+          <Navbar sticky="top" bg="light" expand="lg" className="shadow-sm p-2 mb-5">
+            <Navbar.Brand href="http://localhost:1234/" className="navbar-brand">myMovies</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+              <Link component={RouterLink} to={`/users/${user}`} >
+                <Button variant="light mr-1" size="md" className="profile-button">{user}'s</Button>
+              </Link>
+              <Button variant="primary ml-1" size="md" className="logout-button" onClick={() => this.onLoggedOut()}>Log out</Button>
+            </Navbar.Collapse>
+          </Navbar>
           <Container>
           <Row className="justify-content-md-center main-view">
             <Route exact path="/" render= {() => {

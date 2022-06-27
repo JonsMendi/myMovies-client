@@ -100,7 +100,7 @@ export function RegistrationView(props) {
                                     {/* code added here to display validation error */}
                                     {birthErr && <p>{setBirthErr}</p>}
                                 </Form.Group>
-                                <Button variant="outline-light" type="submit" onClick={handleSubmit}>Register</Button>
+                                <Button variant="outline-light" type="submit" className='registration-button' onClick={handleSubmit}>Register</Button>
                             </Form>
                         </Card.Body>
                     </Card>

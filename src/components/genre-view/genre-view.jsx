@@ -15,12 +15,12 @@ export function GenreView (props) {
                 <Card.Body>
                     <div>
                         <Card.Title><h2>{genre.Name}</h2></Card.Title>
-                        <div className="genre-description">
-                        <span className="label">Description: </span>
-                        <span className="value"><p>{genre.Description}</p></span>
+                        <div className="genre-description mt-3">
+                            <span className="label text-muted">Description: </span>
+                            <span className="value"><p>{genre.Description}</p></span>
                         </div>
-                        <Button variant="outline-secondary mr-3" onClick={goHistory.goBack}>Back</Button>
-                        <Link to={`/`}><Button variant="outline-light">Movies List</Button></Link>
+                        <Button variant="outline-secondary mr-3" className='back-button' onClick={goHistory.goBack}>Back</Button>
+                        <Link to={`/`}><Button variant="outline-light" className='movies-list-button'>Movies List</Button></Link>
                     </div>
                 </Card.Body>
             </Card>

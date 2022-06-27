@@ -1,6 +1,6 @@
-* {
-  box-sizing: border-box;
-  font-family: "Raleway", sans-serif;
-  background-color: #202020;
-  color: #e0e0e0;
+$primary-color: #8B0046;
+$font-family: 'Alegreya Sans', sans-serif;
+
+body {
+  font-family: $font-family;
 }

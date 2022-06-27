@@ -1,1 +1,64 @@
+$primary-color: #B85042;
+$secondary-color: #efeeee;
+$font-family: 'Alegreya Sans', sans-serif;
 
+.material-icons {
+  color: lighten($primary-color, 60%) !important;
+}
+
+.material-icons:hover {
+  color: $primary-color !important;
+}
+
+.genre-link, 
+.director-link {
+  color: $primary-color !important;
+  
+}
+
+.genre-link:hover, 
+.director-link:hover {
+  color: lighten($primary-color, 20%) !important;
+  text-decoration: none !important;
+}
+
+.add-favorite-btn {
+  background-color: $secondary-color !important;
+  color: $primary-color !important;
+  border-color: $secondary-color !important;
+  border-radius: 24px !important;
+}
+
+.add-favorite-btn:hover {
+  color: $primary-color !important;
+  border-color: $secondary-color !important;
+  background-color: darken($secondary-color, 20%) !important;
+}
+
+.add-favorite-btn:focus,
+.add-favorite-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: darken($secondary-color, 20%) !important;
+}
+
+.back-btn {
+    background-color: $primary-color !important;
+    color: $secondary-color!important;
+    border-color: $secondary-color !important;
+    border-radius: 24px !important;
+}
+
+.heart {
+  color: $primary-color !important; 
+}
+
+.border-def {
+    border: none !important;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}

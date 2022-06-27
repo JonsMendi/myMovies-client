@@ -15,25 +15,27 @@ export function DirectorView (props) {
                     <Card.Body>
                         <div>
                             <Card.Title as="h3">{director.Name}</Card.Title>
-                            <div className="director-bio">
-                            <span className="label">Bio: </span>
+                            <div className="director-bio mt-3">
+                            <span className="label text-muted">Bio: </span>
                             <span className="value"><p>{director.Bio}</p></span>
                             </div>
                             {/*<div className="director-movies">
                             <span className="label">Movies: </span>
                             <span className="value"><p>{director.Movies}</p></span>
                             </div>*/}
-                            <div className="director-birth">
-                            <span className="label">Birth: </span>
-                            <span className="value"><p>{director.Birth}</p></span>
-                            </div>
-                            <div className="director-death">
-                            <span className="label">Death: </span>
-                            <span className="value"><p>{director.Death}</p></span>
+                            <div className='d-flex flex-row justify-content-center'>
+                                <div className="director-birth mr-4">
+                                    <span className="label text-muted">Birth: </span>
+                                    <span className="value"><p>{director.Birth}</p></span>
+                                </div>
+                                <div className="director-death">
+                                    <span className="label text-muted">Death: </span>
+                                    <span className="value"><p>{director.Death}</p></span>
+                                </div>
                             </div>
                             <div className="text-center align-items-end pt-4">
-                                <Button variant="outline-secondary mr-3" onClick={goHistory.goBack}>Back</Button>
-                                <Link to={`/`}><Button variant='outline-light'>Movies List</Button></Link>
+                                <Button variant="outline-secondary mr-3" className='back-button' onClick={goHistory.goBack}>Back</Button>
+                                <Link to={`/`}><Button className='movies-list-button'>Movies List</Button></Link>
                             </div>
                         </div>
                     </Card.Body>
