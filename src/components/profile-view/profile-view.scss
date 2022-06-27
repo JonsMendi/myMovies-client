@@ -1,0 +1,55 @@
+$primary-color: #B85042;
+$secondary-color: #efeeee;
+$font-family: 'Alegreya Sans', sans-serif;
+
+.update-button {
+    background-color: $secondary-color !important;
+    border-color: $secondary-color !important;
+    color: $primary-color !important;
+    border-radius: 30px !important;
+}
+
+.update-button:hover {
+    color: $primary-color !important;
+    border-color: $secondary-color !important;
+    background-color: darken($secondary-color, 5%) !important;
+}
+  
+.update-button:focus,
+.update-button:active {
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: darken($secondary-color, 5%) !important;
+}
+
+.delete-button {
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+    color: $secondary-color !important;
+    border-radius: 30px !important;
+}
+
+.delete-button:hover {
+    background-color: lighten( $primary-color, 3% ) !important;
+    border-color: lighten( $primary-color, 3% ) !important;
+}
+  
+.delete-button:focus,
+.delete-button:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: lighten( $primary-color, 20% ) !important;
+}
+
+.movie-link {
+    color: $primary-color;
+    margin-top: 5px;
+    padding-left: 10px;
+    margin-top: 22px;
+}
+  
+.movie-link:hover, 
+.movie-link:hover {
+    color: lighten($primary-color, 20%);
+    text-decoration: none !important;
+}

@@ -1,0 +1,23 @@
+$primary-color: #B85042;
+$secondary-color: #efeeee;
+$font-family: 'Alegreya Sans', sans-serif;
+
+.login-button {
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+    color: $secondary-color !important;
+    border-radius: 30px !important;
+}
+
+.login-button:hover {
+    color: $primary-color !important;
+    border-color: $secondary-color !important;
+    background-color: darken($secondary-color, 5%) !important;
+}
+  
+.login-button:focus,
+.login-button:active {
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: darken($secondary-color, 5%) !important;
+}

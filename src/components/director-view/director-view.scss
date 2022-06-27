@@ -1,0 +1,42 @@
+$primary-color: #B85042;
+$secondary-color: #efeeee;
+$font-family: 'Alegreya Sans', sans-serif;
+
+.back-button {
+    background-color: $secondary-color !important;
+    border-color: $secondary-color !important;
+    color: $primary-color !important;
+    border-radius: 30px !important;
+}
+
+.back-button:hover {
+    color: $primary-color !important;
+    border-color: $secondary-color !important;
+    background-color: darken($secondary-color, 5%) !important;
+}
+  
+.back-button:focus,
+.back-button:active {
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: darken($secondary-color, 5%) !important;
+}
+
+.movies-list-button {
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+    color: $secondary-color !important;
+    border-radius: 30px !important;
+}
+
+.movies-list-button:hover {
+    background-color: lighten( $primary-color, 3% ) !important;
+    border-color: lighten( $primary-color, 3% ) !important;
+}
+  
+.movies-list-button:focus,
+.movies-list-button:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: lighten( $primary-color, 20% ) !important;
+}
