@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "homepage": "http://JonsMendi.github.io/myMovies-client",
+  "main": "src/index.html",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "react-scripts build",
